@@ -4,6 +4,18 @@ const controller = express.Router();
 const studentData = require("../studentData.json");
 
 controller.get("/", (request, response) => {
+  //how do i handle a query string?
+
+  let { limit = 25 } = request.query; // "10"
+
+  limit = Number(limit);
+
+  //how do i change the student data according to the limit?
+
+  //studentData.students = [ 25 items]
+
+  studentData.students = studentData.students.slice(0, limit);
+
   response.json(studentData);
 });
 
