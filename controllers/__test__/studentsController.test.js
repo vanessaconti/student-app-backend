@@ -17,7 +17,16 @@ describe("returns json data for all students", () => {
       .get("/students?limit=10")
       .expect(200)
       .then((response) => {
-        expect(response.body.students);
+        expect(response.body.students).toBeInstanceOf(Array);
+        expect(response.body.students.length).toBe(10);
+      });
+
+    await supertest(app)
+      .get("/students?limit=35")
+      .expect(200)
+      .then((response) => {
+        expect(response.body.students).toBeInstanceOf(Array);
+        expect(response.body.students.length).toBe(25);
       });
   });
 });
